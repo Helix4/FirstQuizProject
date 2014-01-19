@@ -1,0 +1,107 @@
+#body {
+    position: fixed;
+    padding-top: 3em;
+    background-color: #B8B8B8;
+    height: 98%;
+    width: 98%;
+    border: solid black 0.1em;
+    border-radius: 0.2em;
+}
+
+fieldset {
+    position: relative;
+    height: 30em;
+    width: 96em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #080808;
+    opacity: 0.60;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+#question {
+    border: solid black 0.1em;
+    position: fixed;
+    padding: 1em;
+    margin-top: 3.5em;
+    margin-left: 2em;
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#qnum {
+    position: absolute;
+    font-variant: small-caps;
+    font-weight: bold;
+    right: 3.8em;
+    top: 3.2em;
+    border-left: solid black 0.1em;
+    border-bottom: solid black 0.1em;
+    padding-left: 0.5em;
+}
+
+#radio1 {
+    position: absolute;
+    left: 12.5%;
+    bottom: 5%;
+}
+
+#radio2 {
+    position: absolute;
+    left: 37.5%;
+    bottom: 5%;
+}
+
+#radio3 {
+    position: absolute;
+    left: 62.5%;
+    bottom: 5%;
+}
+
+#radio4 {
+    position: absolute;
+    left: 87.5%;
+    bottom: 5%;
+    border: solid black 0.1em;
+}
+
+#next {
+    position: fixed;
+    border-radius: 10em;
+    border: solid black .5em;
+    bottom: 5em;
+    right: 5em;
+    height: 5em;
+    width: 15em;
+    font-weight: bold;
+    font-aligh: center;
+}
+
+.ans {
+    position: absolute;
+    bottom: 21em;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border: solid black 0.5em;
+    padding: 1em;
+    width: 15em;
+    background-color: #3399FF;
+}
+
+#answer1 {
+    left: 5em;
+}
+
+#answer2 {
+    left: 29em;
+}
+
+#answer3 {
+    left: 53em;
+}
+
+#answer4 {
+    left: 77em;
+}
