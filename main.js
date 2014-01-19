@@ -1,12 +1,12 @@
 var allQuestions = [                                    // Stores all questions as objects
   {question: "How many mountains are there?",
-   choices: ["2", "3", "7", "5"],
+   choices: ["Two", "Three", "Seven", "Five"],
    correctAnswer: 2},
   {question: "Where did Sifu Phan come from?",
    choices: ["China", "Vietnam", "Burma", "Russia"],
    correctAnswer: 1},
   {question: "How many animals are in our system?",
-   choices: ["5 (Can be 4)", "10 (Can be 7)", "6 (Can be 7)", "7 (Can be 5)"],
+   choices: ["Five (Can Be Four)", "Ten (Can Be Seven)", "Six (Can Be Seven)", "Seven (Can Be Five)"],
    correctAnswer: 3}
 ];
 
@@ -43,15 +43,29 @@ function checkAnswer() {
  */
 function loadNextQuestion() {
   var questionHeader = document.getElementById("question");     // Will insert questions into this HTML element
-  var answerLabels   = document.getElementsByTagName("label");  // Will Insert answers into the child text nodes of this element using textContent
   var answerChoices  = allQuestions[questionQueue].choices;     // Fetching answers
   var questionLegend = document.getElementById("qnum");         // Displays which question the user is currently viewing
+  var body = document.getElementById("body");                   // To insert questions
 
   questionLegend.innerHTML = "Question " + (questionQueue + 1);
   questionHeader.innerHTML = allQuestions[questionQueue].question;           // Inserting question text
-  for( var i = 0, j = 0, len = answerChoices.length; i < len; i++, j++ ) {   // First child of a label is the <input type=radio> element,
-                                                                             // so we use childNodes[1] to access the second child (text node)
-    answerLabels[i].childNodes[1].textContent = answerChoices[j];
+
+  for(var i = 0, len = answerChoices.length; i < len; i++) {
+    var element = document.createElement("div");
+    element.innerHTML = answerChoices[i];
+    element.id = "answer" + (i + 1);           // Will assign ids as answer1, answer2, answer3, answer4 for CSS positioning
+    element.className = "ans"                  // Use class name to fetch and remove old answers before inserting new ones
+    body.appendChild(element);
+    }
+
+}
+
+function removeOldAnswers() {
+  var body = document.getElementById("body");
+  var oldAnswers = document.getElementsByClassName("ans");  // Here using the ans className assigned by loadNextQuestion()
+
+  while(oldAnswers.length > 0) {
+    body.removeChild(oldAnswers[0]);                        // var oldAnswers updates itself upon each removal, so we always remove the 0th element!
   }
 }
 
@@ -63,8 +77,9 @@ window.onload = function() {
     if ( checkAnswer() ) {          // Check answer and update score if necessary
       totalScore += 1;
     }
-    if (++questionQueue < allQuestions.length) {  // Check for end of questions
-    loadNextQuestion();                           // If not end, load next question
+    if (++questionQueue < allQuestions.length) {  // Check for end of questions AND update the questionQueue!
+      removeOldAnswers();                         // Remove old answers
+      loadNextQuestion();                         // If not end, load next question
     }
     else {  // Display the score only
       var scoreDisplay = document.createDocumentFragment();
