@@ -43,27 +43,26 @@ fieldset {
 
 #radio1 {
     position: absolute;
-    left: 12.5%;
-    bottom: 5%;
+    left: 13.5em;
+    bottom: 2em;
 }
 
 #radio2 {
     position: absolute;
-    left: 37.5%;
-    bottom: 5%;
+    left: 40em;
+    bottom: 2em;
 }
 
 #radio3 {
     position: absolute;
-    left: 62.5%;
-    bottom: 5%;
+    left: 66.5em;
+    bottom: 2em;
 }
 
 #radio4 {
     position: absolute;
-    left: 87.5%;
-    bottom: 5%;
-    border: solid black 0.1em;
+    left: 93em;
+    bottom: 2em;
 }
 
 #next {
