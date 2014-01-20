@@ -78,6 +78,7 @@ fieldset {
 }
 
 .ans {
+    display: box;
     position: absolute;
     bottom: 21em;
     color: white;
