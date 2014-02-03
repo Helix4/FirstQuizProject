@@ -45,28 +45,16 @@ function loadNextQuestion() {
   var questionHeader = document.getElementById("question");     // Will insert questions into this HTML element
   var answerChoices  = allQuestions[questionQueue].choices;     // Fetching answers
   var questionLegend = document.getElementById("qnum");         // Displays which question the user is currently viewing
-  var body = document.getElementById("body");                   // To insert questions
+  var inputs = document.getElementsByTagName("input");            // To insert questions
 
   questionLegend.innerHTML = "Question " + (questionQueue + 1);
-  questionHeader.innerHTML = allQuestions[questionQueue].question;           // Inserting question text
+  questionHeader.innerHTML = allQuestions[questionQueue].question;  // Inserting question text
 
   for(var i = 0, len = answerChoices.length; i < len; i++) {
-    var element = document.createElement("div");
-    element.innerHTML = answerChoices[i];
-    element.id = "answer" + (i + 1);           // Will assign ids as answer1, answer2, answer3, answer4 for CSS positioning
-    element.className = "ans"                  // Use class name to fetch and remove old answers before inserting new ones
-    body.appendChild(element);
-    }
-
-}
-
-function removeOldAnswers() {
-  var body = document.getElementById("body");
-  var oldAnswers = document.getElementsByClassName("ans");  // Here using the ans className assigned by loadNextQuestion()
-
-  while(oldAnswers.length > 0) {
-    body.removeChild(oldAnswers[0]);                        // var oldAnswers updates itself upon each removal, so we always remove the 0th element!
+    label = document.getElementsByTagName("label")[i];
+    label.textContent = answerChoices[i];
   }
+
 }
 
 window.onload = function() {
@@ -78,7 +66,6 @@ window.onload = function() {
       totalScore += 1;
     }
     if (++questionQueue < allQuestions.length) {  // Check for end of questions AND update the questionQueue!
-      removeOldAnswers();                         // Remove old answers
       loadNextQuestion();                         // If not end, load next question
     }
     else {  // Display the score only
