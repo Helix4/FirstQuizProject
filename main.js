@@ -1,13 +1,16 @@
 var allQuestions = [                                    // Stores all questions as objects
   {question: "How many mountains are there?",
    choices: ["Two", "Three", "Seven", "Five"],
-   correctAnswer: 2},
+   correctAnswer: 2,
+   userAnswer: null},
   {question: "Where did Sifu Phan come from?",
    choices: ["China", "Vietnam", "Burma", "Russia"],
-   correctAnswer: 1},
+   correctAnswer: 1,
+   userAnswer: null},
   {question: "How many animals are in our system?",
    choices: ["Five (Can Be Four)", "Ten (Can Be Seven)", "Six (Can Be Seven)", "Seven (Can Be Five)"],
-   correctAnswer: 3}
+   correctAnswer: 3,
+   userAnswer: null}
 ];
 
 var totalScore = 0,         // Tracks user score
@@ -18,23 +21,23 @@ var totalScore = 0,         // Tracks user score
  * radio button representing the user's answer as
  * a number.
  */
-function getUserAnswer() {
-  var i = 0, userAnswer;
-  var answerInputs = document.forms.quiz.elements.answer;
-  do {
-    userAnswer = answerInputs[i].getAttribute("value");
-  } while (!answerInputs[i].checked && ++i)
+function handleAnswer() {
+  var answerChoices = document.forms.quiz.elements.answer;
+  var userAnswer;
 
-  return Number(userAnswer);
-}
+  for(var i = 0, len = answerChoices.length; i < len; i++) {
+    if (answerChoices[i].checked) {
+      userAnswer = answerChoices[i].getAttribute("value");
+      allQuestions[questionQueue].userAnswer = i;
+    }
+  }
 
-/* checkAnswer():
- * Compares the queued question's correctAnswer object value
- * with user's selected answer, returning true for the
- * correct answer and false for an incorrect answer.
- */
-function checkAnswer() {
-  return getUserAnswer() === allQuestions[questionQueue].correctAnswer;
+  if (userAnswer) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 /* loadNextQuestion():
@@ -53,26 +56,51 @@ function loadNextQuestion() {
   for(var i = 0, len = answerChoices.length; i < len; i++) {
     label = document.getElementsByTagName("label")[i];
     label.textContent = answerChoices[i];
+    document.forms.quiz.elements.answer[i].checked = false;  // Ghetto making sure the radio button isn't checked onload!
   }
 
 }
 
+function displayScore() {
+  var scoreDisplay = document.createDocumentFragment(),
+      totalScore = 0;
+
+  for(var i = 0, len = allQuestions.length; i < len; i++) {
+    if (allQuestions[i].correctAnswer === allQuestions[i].userAnswer) {
+      ++totalScore;
+    }
+  }
+  scoreDisplay.innerHTML = "<h1> Your Final Score:</h1><br><h2>" + totalScore.toString() + " / " + allQuestions.length.toString() + "</h2>";
+  document.body.innerHTML = scoreDisplay.innerHTML;
+}
+
 window.onload = function() {
   var nextButton = document.getElementById("next");
+  var backButton = document.getElementById("back");
 
   loadNextQuestion();               // Insert first question with default global value n = 0
   nextButton.onclick = function() {
-    if ( checkAnswer() ) {          // Check answer and update score if necessary
-      totalScore += 1;
-    }
-    if (++questionQueue < allQuestions.length) {  // Check for end of questions AND update the questionQueue!
+    if ( !handleAnswer() ) { // If handleAnswer returns false, fire alert and end the sequence
+      alert("Please select an answer to this question before moving to the next question!");
+    } else if (++questionQueue < allQuestions.length) {  // Check for end of questions AND update the questionQueue!
       loadNextQuestion();                         // If not end, load next question
+      if(allQuestions[questionQueue].userAnswer) { // If userAnswer is not null (meaning user has selected an answer and used the back button)
+        document.forms.quiz.elements.answer[allQuestions[questionQueue].userAnswer].checked = true; // Check their answer
+      }
     }
-    else {  // Display the score only
-      var scoreDisplay = document.createDocumentFragment();
+    else {
+      displayScore();
+    }
+  };
 
-      scoreDisplay.innerHTML = "<h1> Your Final Score:</h1><br><h2>" + totalScore.toString() + " / " + allQuestions.length.toString();
-      document.body.innerHTML = scoreDisplay.innerHTML;
+  backButton.onclick = function() {
+    if (questionQueue == 0) {
+      alert("You are at the first question!");
+    } else {
+      --questionQueue;
+      loadNextQuestion();
+      document.forms.quiz.elements.answer[allQuestions[questionQueue].userAnswer].checked = true;
     }
-  }
+  };
+
 }
