@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--    <meta http-equiv="refresh" content="3"> -->
+    <title>First Quiz Vanilla Javascript</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="questions.json" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div id="body">
+        <h2 id="question">What is the answer to this question?</h2>
+        <form name="quiz">
+        <fieldset><legend id="qnum">Question Number</legend>
+          <div id="onewrapper">
+            <label for="choice1">Choice 1</label><br>
+            <input id="choice1" type="radio" name="answer" value="0">
+          </div>
+          <div id="twowrapper">
+            <label for="choice2">Choice 2</label><br>
+            <input id="choice2" type="radio" name="answer" value="1">
+          </div>
+          <div id="threewrapper">
+            <label for="choice3">Choice 3</label><br>
+            <input id="choice3" type="radio" name="answer" value="2">
+          </div>
+          <div id="fourwrapper">
+            <label for="choice4">Choice 4</label><br>
+            <input id="choice4" type="radio" name="answer" value="3">
+          </div>
+        </fieldset><br>
+        <input id="back" type="button" value="Go Back">
+        <input id="next" type="button" value="Next Question">
+      </form>
+    </div>
+  </body>
+</html>

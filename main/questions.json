@@ -1,0 +1,14 @@
+allQuestions = ([
+  {question: "How many mountains are there?",
+   choices: ["Two", "Three", "Seven", "Five"],
+   correctAnswer: 2,
+   userAnswer: null},
+  {question: "Where did Sifu Phan come from?",
+   choices: ["China", "Vietnam", "Burma", "Russia"],
+   correctAnswer: 1,
+   userAnswer: null},
+  {question: "How many animals are in our system?",
+   choices: ["Five (Can Be Four)", "Ten (Can Be Seven)", "Six (Can Be Seven)", "Seven (Can Be Five)"],
+   correctAnswer: 3,
+   userAnswer: null}
+]);

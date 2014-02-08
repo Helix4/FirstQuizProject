@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>First Quiz JQuery Implementation</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="mainjquery.js" type="text/javascript"></script>
+
+  </head>
+
+  <body>
+    <div id="body">
+      <form name="quiz">
+        <fieldset><legend id="qnum">Question 1</legend>
+          <h2 id="question">What is the answer to this question?</h2>
+          <label><input type="radio" name="answer" value="0"><span class="choice">Choice One</span></label><br><br>
+          <label><input type="radio" name="answer" value="1"><span class="choice">Choice Two</span></label><br><br>
+          <label><input type="radio" name="answer" value="2"><span class="choice">Choice Three</span></label><br><br>
+          <label><input type="radio" name="answer" value="3"><span class="choice">Choice Four</span></label><br><br>
+        </fieldset><br>
+        <input id="next" type="button" value="Next Question">
+      </form>
+    </div>
+  </body>
+</html>
